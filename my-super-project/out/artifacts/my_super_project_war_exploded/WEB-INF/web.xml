@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- add servlet -->
+    <servlet>
+        <servlet-name>add</servlet-name>
+        <servlet-class>app.servlets.AddServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <!-- list servlet -->
+    <servlet>
+        <servlet-name>list</servlet-name>
+        <servlet-class>app.servlets.ListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>list</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+
+    <!-- detail servlet -->
+    <servlet>
+        <servlet-name>detail</servlet-name>
+        <servlet-class>app.servlets.DetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>detail</servlet-name>
+        <url-pattern>/detail</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <!-- add Post servlet -->
+    <servlet>
+        <servlet-name>addPost</servlet-name>
+        <servlet-class>app.servlets.AddPostServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addPost</servlet-name>
+        <url-pattern>/addPost</url-pattern>
+    </servlet-mapping>
+
+    <!-- list Post servlet -->
+    <servlet>
+        <servlet-name>listPost</servlet-name>
+        <servlet-class>app.servlets.ListPostServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>listPost</servlet-name>
+        <url-pattern>/listPost</url-pattern>
+    </servlet-mapping>
+
+    <!-- detail Post servlet -->
+    <servlet>
+        <servlet-name>detailPost</servlet-name>
+        <servlet-class>app.servlets.DetailPostServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>detailPost</servlet-name>
+        <url-pattern>/detailPost</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <!-- add Department servlet -->
+    <servlet>
+        <servlet-name>addDepartment</servlet-name>
+        <servlet-class>app.servlets.AddDepartmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addDepartment</servlet-name>
+        <url-pattern>/addDepartment</url-pattern>
+    </servlet-mapping>
+
+    <!-- list Department servlet -->
+    <servlet>
+        <servlet-name>listDepartment</servlet-name>
+        <servlet-class>app.servlets.ListDepartmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>listDepartment</servlet-name>
+        <url-pattern>/listDepartment</url-pattern>
+    </servlet-mapping>
+
+    <!-- detail Department servlet -->
+    <servlet>
+        <servlet-name>detailDepartment</servlet-name>
+        <servlet-class>app.servlets.DetailDepartmentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>detailDepartment</servlet-name>
+        <url-pattern>/detailDepartment</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+    <description>MySQL Test App</description>
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/mydb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+</web-app>
