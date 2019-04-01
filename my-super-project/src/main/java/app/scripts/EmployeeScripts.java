@@ -85,6 +85,7 @@ public class EmployeeScripts {
 
             pstmt.executeUpdate();
 
+
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
@@ -95,7 +96,7 @@ public class EmployeeScripts {
             //close connection ,stmt and resultset here
             try { con.close(); } catch(SQLException se) { /*can't do anything */ }
             try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+//            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
         }
     }
 
@@ -345,7 +346,7 @@ public class EmployeeScripts {
             //close connection ,stmt and resultset here
             try { con.close(); } catch(SQLException se) { /*can't do anything */ }
             try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+//            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
         }
     }
 }

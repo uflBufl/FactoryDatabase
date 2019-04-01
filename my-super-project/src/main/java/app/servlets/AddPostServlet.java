@@ -17,6 +17,8 @@ public class AddPostServlet extends HttpServlet {
         PostScripts ps = new PostScripts();
         ps.addPost(req);
 
+//        System.out.println("123");
+
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/addPost.jsp");
         requestDispatcher.forward(req, resp);
     }

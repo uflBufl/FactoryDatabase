@@ -58,6 +58,8 @@ public class PostScripts {
 
             pstmt.executeUpdate();
 
+//            System.out.println("321");
+
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
         }
@@ -68,7 +70,7 @@ public class PostScripts {
             //close connection ,stmt and resultset here
             try { con.close(); } catch(SQLException se) { /*can't do anything */ }
             try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+//            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
         }
     }
 
@@ -280,7 +282,7 @@ public class PostScripts {
             //close connection ,stmt and resultset here
             try { con.close(); } catch(SQLException se) { /*can't do anything */ }
             try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+//            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
         }
     }
 
