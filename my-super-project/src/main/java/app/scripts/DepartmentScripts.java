@@ -19,7 +19,7 @@ public class DepartmentScripts {
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
-    public void AddDepartment(HttpServletRequest req){
+    public void addDepartment(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();
@@ -72,7 +72,7 @@ public class DepartmentScripts {
     }
 
 
-    public void DeleteDepartment(HttpServletRequest req){
+    public void deleteDepartment(HttpServletRequest req){
         String departmentId = req.getParameter("deleteButton");
         String sqlRequest = DepartmentRequests.departmentDelete;
 
@@ -94,7 +94,7 @@ public class DepartmentScripts {
     }
 
 
-    public ArrayList<Department> SelectManyDepartments(HttpServletRequest req){
+    public ArrayList<Department> selectFilterDepartments(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();
@@ -177,7 +177,7 @@ public class DepartmentScripts {
     }
 
 
-    public Department SelectOneDepartment(HttpServletRequest req){
+    public Department selectDepartmentById(HttpServletRequest req){
 
         String id = req.getParameter("DepartmentId");
         String sqlRequest = DepartmentRequests.departmentSelectWhereDepartmentId;
@@ -222,7 +222,7 @@ public class DepartmentScripts {
 
 
 
-    public void UpdateDepartment(HttpServletRequest req){
+    public void updateDepartment(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();

@@ -32,7 +32,7 @@ public class ListPostServlet extends HttpServlet {
         }
         else {
             PostScripts ps = new PostScripts();
-            ps.DeletePost(req);
+            ps.deletePost(req);
 
             resp.sendRedirect(req.getContextPath() + "/listPost");
         }
@@ -44,7 +44,7 @@ public class ListPostServlet extends HttpServlet {
 
 
         PostScripts ps = new PostScripts();
-        ArrayList<Post> posts = ps.SelectManyPosts(req);
+        ArrayList<Post> posts = ps.selectFilterPosts(req);
 
         req.setAttribute("postsData", posts);
 

@@ -7,9 +7,6 @@ public class Department {
     private String name;
     private String address;
 
-    public Department() {
-    }
-
     public Department(int departmentId, String name, String address) {
         this.departmentId = departmentId;
         this.name = name;

@@ -47,7 +47,7 @@ public class EmployeeScripts {
 
 
 
-    public void AddEmployee(HttpServletRequest req){
+    public void addEmployee(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();
@@ -104,7 +104,7 @@ public class EmployeeScripts {
 
 
 
-    public void DeleteEmployee(HttpServletRequest req){
+    public void deleteEmployee(HttpServletRequest req){
         String employeeId = req.getParameter("deleteButton");
         String sqlRequest = Requests.employeeDelete;
 
@@ -126,7 +126,7 @@ public class EmployeeScripts {
     }
 
 
-    public ArrayList<Employee> SelectManyEmployees(HttpServletRequest req){
+    public ArrayList<Employee> selectFilterEmployees(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();
@@ -210,7 +210,7 @@ public class EmployeeScripts {
 
 
 
-    public Employee SelectOneEmployee(HttpServletRequest req){
+    public Employee selectEmployeeById(HttpServletRequest req){
 
         String id = req.getParameter("EmployeeId");
         String sqlRequest = Requests.employeeSelectWhereEmployeeId;
@@ -287,7 +287,7 @@ public class EmployeeScripts {
 
 
 
-    public void UpdateEmployee(HttpServletRequest req){
+    public void updateEmployee(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();

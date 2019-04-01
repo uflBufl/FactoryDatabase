@@ -30,7 +30,7 @@ public class ListServlet extends HttpServlet {
         }
         else {
             EmployeeScripts es = new EmployeeScripts();
-            es.DeleteEmployee(req);
+            es.deleteEmployee(req);
 
             resp.sendRedirect(req.getContextPath() + "/list");
         }
@@ -39,7 +39,7 @@ public class ListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EmployeeScripts es = new EmployeeScripts();
-        ArrayList<Employee> employees = es.SelectManyEmployees(req);
+        ArrayList<Employee> employees = es.selectFilterEmployees(req);
 
         req.setAttribute("employeesData", employees);
 

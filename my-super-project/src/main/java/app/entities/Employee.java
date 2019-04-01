@@ -11,10 +11,6 @@ public class Employee {
     private int departmentId;
     private int head;
 
-
-    public Employee() {
-    }
-
     public Employee(int employeeId, String name, String email, String address, int postId, int departmentId, int head) {
         this.employeeId = employeeId;
         this.name = name;

@@ -13,7 +13,7 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EmployeeScripts es = new EmployeeScripts();
-        es.AddEmployee(req);
+        es.addEmployee(req);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/add.jsp");
         requestDispatcher.forward(req, resp);

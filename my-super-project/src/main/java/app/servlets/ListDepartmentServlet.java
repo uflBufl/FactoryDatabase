@@ -32,7 +32,7 @@ public class ListDepartmentServlet extends HttpServlet {
         }
         else {
             DepartmentScripts ds = new DepartmentScripts();
-            ds.DeleteDepartment(req);
+            ds.deleteDepartment(req);
 
             resp.sendRedirect(req.getContextPath() + "/listDepartment");
         }
@@ -41,7 +41,7 @@ public class ListDepartmentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DepartmentScripts ds = new DepartmentScripts();
-        ArrayList<Department> departments = ds.SelectManyDepartments(req);
+        ArrayList<Department> departments = ds.selectFilterDepartments(req);
 
         req.setAttribute("departmentsData", departments);
 

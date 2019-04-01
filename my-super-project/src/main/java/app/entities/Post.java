@@ -8,9 +8,6 @@ public class Post {
     private int salary;
     private int time;
 
-    public Post() {
-    }
-
     public Post(int postId, String name, int salary, int time) {
         this.postId = postId;
         this.name = name;

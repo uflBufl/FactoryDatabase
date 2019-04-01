@@ -20,7 +20,7 @@ public class DetailDepartmentServlet extends HttpServlet {
         String departmentId = req.getParameter("DepartmentId");
 
         DepartmentScripts ds = new DepartmentScripts();
-        ds.UpdateDepartment(req);
+        ds.updateDepartment(req);
 
         resp.sendRedirect(req.getContextPath() + "/detailDepartment?DepartmentId="+departmentId);
 
@@ -29,7 +29,7 @@ public class DetailDepartmentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DepartmentScripts ds = new DepartmentScripts();
-        Department department = ds.SelectOneDepartment(req);
+        Department department = ds.selectDepartmentById(req);
 
         req.setAttribute("Department", department);
 

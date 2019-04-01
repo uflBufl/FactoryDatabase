@@ -18,7 +18,7 @@ public class DetailServlet extends HttpServlet {
         String employeeId = req.getParameter("EmployeeId");
 
         EmployeeScripts es = new EmployeeScripts();
-        es.UpdateEmployee(req);
+        es.updateEmployee(req);
 
         resp.sendRedirect(req.getContextPath() + "/detail?EmployeeId="+employeeId);
 
@@ -27,7 +27,7 @@ public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EmployeeScripts es = new EmployeeScripts();
-        Employee employee = es.SelectOneEmployee(req);
+        Employee employee = es.selectEmployeeById(req);
 
         req.setAttribute("Employee", employee);
 

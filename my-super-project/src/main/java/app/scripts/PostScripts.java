@@ -20,7 +20,7 @@ public class PostScripts {
     private static ResultSet rs;
 
 
-    public void AddPost(HttpServletRequest req){
+    public void addPost(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();
@@ -72,7 +72,7 @@ public class PostScripts {
         }
     }
 
-    public void DeletePost(HttpServletRequest req){
+    public void deletePost(HttpServletRequest req){
         String postId = req.getParameter("deleteButton");
         String sqlRequest = PostRequests.postDelete;
 
@@ -95,7 +95,7 @@ public class PostScripts {
 
 
 
-    public ArrayList<Post> SelectManyPosts(HttpServletRequest req){
+    public ArrayList<Post> selectFilterPosts(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();
@@ -178,7 +178,7 @@ public class PostScripts {
     }
 
 
-    public Post SelectOnePost(HttpServletRequest req){
+    public Post selectPostById(HttpServletRequest req){
 
         String id = req.getParameter("PostId");
         String sqlRequest = PostRequests.postSelectWherePostId;
@@ -222,7 +222,7 @@ public class PostScripts {
     }
 
 
-    public void UpdatePost(HttpServletRequest req){
+    public void updatePost(HttpServletRequest req){
 
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> params = new ArrayList<String>();

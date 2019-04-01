@@ -15,7 +15,7 @@ public class AddPostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PostScripts ps = new PostScripts();
-        ps.AddPost(req);
+        ps.addPost(req);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/addPost.jsp");
         requestDispatcher.forward(req, resp);

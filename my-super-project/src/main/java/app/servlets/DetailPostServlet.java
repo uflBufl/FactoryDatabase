@@ -20,7 +20,7 @@ public class DetailPostServlet extends HttpServlet {
         String postId = req.getParameter("PostId");
 
         PostScripts ps = new PostScripts();
-        ps.UpdatePost(req);
+        ps.updatePost(req);
 
         resp.sendRedirect(req.getContextPath() + "/detailPost?PostId="+postId);
 
@@ -29,7 +29,7 @@ public class DetailPostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PostScripts ps = new PostScripts();
-        Post post = ps.SelectOnePost(req);
+        Post post = ps.selectPostById(req);
 
         req.setAttribute("Post", post);
 

@@ -14,7 +14,7 @@ public class AddDepartmentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DepartmentScripts ds = new DepartmentScripts();
-        ds.AddDepartment(req);
+        ds.addDepartment(req);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/addDepartment.jsp");
         requestDispatcher.forward(req, resp);
