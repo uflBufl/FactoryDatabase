@@ -18,40 +18,22 @@ public class DepartmentScripts {
     private static Connection con;
     private static PreparedStatement pstmt;
     private static ResultSet rs;
+    private static SQLConnection scon;
 
-    public void addDepartment(HttpServletRequest req){
-
-        ArrayList<String> args = new ArrayList<String>();
-        ArrayList<String> params = new ArrayList<String>();
-
-        String nameFilterString = req.getParameter("name");
-        if(!(nameFilterString.equals(""))){ args.add("name"); params.add(nameFilterString);}
-//        String emailFilterString = req.getParameter("email");
-//        if(!(emailFilterString.equals("") || emailFilterString.equals("null"))){ args.add("email"); params.add(emailFilterString);}
-        String addressFilterString = req.getParameter("address");
-        if(!(addressFilterString.equals("") || addressFilterString.equals("null"))){ args.add("address"); params.add(addressFilterString);}
-//        String postIdFilterString = req.getParameter("postid");
-//        if(!(postIdFilterString.equals("") )){ args.add("postId");params.add(postIdFilterString);}
-//        String departmentIdFilterString = req.getParameter("departmentid");
-//        if(!(departmentIdFilterString.equals(""))){ args.add("departmentId"); params.add(departmentIdFilterString);}
-//        String headFilterString = req.getParameter("head");
-//        if(!(headFilterString.equals("")  || headFilterString.equals("0"))){ args.add("head");params.add(headFilterString);}
-
+    public DepartmentScripts() {
         try {
-            SQLConnection scon = new SQLConnection();
+            this.scon = new SQLConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addDepartment(ArrayList<String> params, ArrayList<String> args) {
+        try {
             con = scon.getConnection();
-
             String sqlRequest = DepartmentRequests.getDepartmentInsert(args);
-
             pstmt = con.prepareStatement(sqlRequest);
-
-            int i = 1;
-
-            for (String param : params
-            ) {
-                pstmt.setString(i, param);
-                i++;
-            }
+            ServletsScripts.setParams(params, pstmt);
 
             System.out.println(pstmt.toString());
 
@@ -59,83 +41,55 @@ public class DepartmentScripts {
 
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             //close connection ,stmt and resultset here
-            try { con.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-//            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+            try {
+                con.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                pstmt.close();
+            } catch (SQLException se) { /*can't do anything */ }
         }
     }
 
 
-    public void deleteDepartment(HttpServletRequest req){
-        String departmentId = req.getParameter("deleteButton");
+    public void deleteDepartment(String departmentId) {
         String sqlRequest = DepartmentRequests.departmentDelete;
 
         try {
-
-            SQLConnection scon = new SQLConnection();
             con = scon.getConnection();
             pstmt = con.prepareStatement(sqlRequest);
             pstmt.setString(1, departmentId);
             pstmt.executeUpdate();
 
-        } catch (SQLException sqlEx) { sqlEx.printStackTrace(); }
-        catch (Exception ex) { ex.printStackTrace(); }
-        finally {
-            try { con.close(); } catch (SQLException se) { /*can't do anything */ }
-            try { pstmt.close(); } catch (SQLException se) { /*can't do anything */ }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                pstmt.close();
+            } catch (SQLException se) { /*can't do anything */ }
         }
 
     }
 
 
-    public ArrayList<Department> selectFilterDepartments(HttpServletRequest req){
-
-        ArrayList<String> args = new ArrayList<String>();
-        ArrayList<String> params = new ArrayList<String>();
-
-        String nameFilterString = req.getParameter("Name");
-        if(!(nameFilterString == "" || nameFilterString == null)){ args.add("name"); params.add(nameFilterString);}
-//        String emailFilterString = req.getParameter("Email");
-//        if(!(emailFilterString == "" || emailFilterString == null)){ args.add("email"); params.add(emailFilterString);}
-        String addressFilterString = req.getParameter("Address");
-        if(!(addressFilterString == "" || addressFilterString == null)){ args.add("address"); params.add(addressFilterString);}
-//        String postIdFilterString = req.getParameter("PostId");
-//        if(!(postIdFilterString == "" || postIdFilterString == null)){ args.add("postId");params.add(postIdFilterString);}
-//        String departmentIdFilterString = req.getParameter("DepartmentId");
-//        if(!(departmentIdFilterString == "" || departmentIdFilterString == null)){ args.add("departmentId"); params.add(departmentIdFilterString);}
-//        String headFilterString = req.getParameter("Head");
-//        System.out.println(headFilterString);
-//        if(!(headFilterString == "" || headFilterString == null)){ args.add("head");params.add(headFilterString);}
-
+    public ArrayList<Department> selectFilterDepartments(ArrayList<String> params, ArrayList<String> args) {
         ArrayList<Department> departments = new ArrayList<Department>();
         try {
-
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
-            SQLConnection scon = new SQLConnection();
             con = scon.getConnection();
             if (!args.isEmpty()) {
 
                 String sqlRequest = DepartmentRequests.getDepartmentSelectWhere(args);
 
-//                System.out.println(sqlRequest);
-
                 pstmt = con.prepareStatement(sqlRequest);
-
-                int i = 1;
-
-                for (String param : params
-                ) {
-                    pstmt.setString(i, param);
-                    i++;
-                }
+                ServletsScripts.setParams(params, pstmt);
 
                 System.out.println(pstmt.toString());
 
@@ -145,17 +99,10 @@ public class DepartmentScripts {
             }
 
             rs = pstmt.executeQuery();
-
-//            ArrayList<Employee> employees = new ArrayList<Employee>();
-
             while (rs.next()) {
                 int departmentId = rs.getInt(1);
                 String name = rs.getString(2);
-//                String email = rs.getString(3);
                 String address = rs.getString(3);
-//                int postId = rs.getInt(5);
-//                int departmentId = rs.getInt(6);
-//                int head = rs.getInt(7);
 
                 Department department = new Department(departmentId, name, address);
                 departments.add(department);
@@ -163,124 +110,85 @@ public class DepartmentScripts {
 
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             //close connection ,stmt and resultset here
-            try { con.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+            try {
+                con.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                pstmt.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                rs.close();
+            } catch (SQLException se) { /*can't do anything */ }
         }
         return departments;
     }
 
 
-    public Department selectDepartmentById(HttpServletRequest req){
+    public Department selectDepartmentById(String id) {
 
-        String id = req.getParameter("DepartmentId");
         String sqlRequest = DepartmentRequests.departmentSelectWhereDepartmentId;
         Department department = null;
         try {
-
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
-            SQLConnection scon = new SQLConnection();
             con = scon.getConnection();
             pstmt = con.prepareStatement(sqlRequest);
-            pstmt.setString(1,id);
+            pstmt.setString(1, id);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 int employeeId = rs.getInt(1);
                 String name = rs.getString(2);
-//                String email = rs.getString(3);
                 String address = rs.getString(3);
-//                int postId = rs.getInt(5);
-//                int departmentId = rs.getInt(6);
-//                int head = rs.getInt(7);
 
-                department = new Department(employeeId,name,address);
+                department = new Department(employeeId, name, address);
             }
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             //close connection ,stmt and resultset here
-            try { con.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+            try {
+                con.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                pstmt.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                rs.close();
+            } catch (SQLException se) { /*can't do anything */ }
         }
 
         return department;
     }
 
 
-
-    public void updateDepartment(HttpServletRequest req){
-
-        ArrayList<String> args = new ArrayList<String>();
-        ArrayList<String> params = new ArrayList<String>();
-
-        String nameFilterString = req.getParameter("name");
-        if(!(nameFilterString.equals(""))){ args.add("name"); params.add(nameFilterString);}
-//        String emailFilterString = req.getParameter("email");
-//        if(!(emailFilterString.equals("") || emailFilterString.equals("null"))){ args.add("email"); params.add(emailFilterString);}
-        String addressFilterString = req.getParameter("address");
-        if(!(addressFilterString.equals("") || addressFilterString.equals("null"))){ args.add("address"); params.add(addressFilterString);}
-//        String postIdFilterString = req.getParameter("postid");
-//        if(!(postIdFilterString.equals("") )){ args.add("postId");params.add(postIdFilterString);}
-//        String departmentIdFilterString = req.getParameter("departmentid");
-//        if(!(departmentIdFilterString.equals(""))){ args.add("departmentId"); params.add(departmentIdFilterString);}
-//        String headFilterString = req.getParameter("head");
-//        if(!(headFilterString.equals("")  || headFilterString.equals("0"))){ args.add("head");params.add(headFilterString);}
-
-        String departmentId = req.getParameter("DepartmentId");
-        params.add(departmentId);
-
+    public void updateDepartment(ArrayList<String> params, ArrayList<String> args) {
         try {
-
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-
-            SQLConnection scon = new SQLConnection();
             con = scon.getConnection();
 
             String sqlRequest = DepartmentRequests.getDepartmentUpdate(args);
-
-//            System.out.println(sqlRequest);
-//            System.out.println(params);
-
             pstmt = con.prepareStatement(sqlRequest);
-
-            int i = 1;
-
-            for (String param : params
-            ) {
-                pstmt.setString(i, param);
-                i++;
-            }
+            ServletsScripts.setParams(params, pstmt);
 
             System.out.println(pstmt.toString());
 
             pstmt.executeUpdate();
-
         } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             //close connection ,stmt and resultset here
-            try { con.close(); } catch(SQLException se) { /*can't do anything */ }
-            try { pstmt.close(); } catch(SQLException se) { /*can't do anything */ }
-//            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+            try {
+                con.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                pstmt.close();
+            } catch (SQLException se) { /*can't do anything */ }
         }
     }
 }

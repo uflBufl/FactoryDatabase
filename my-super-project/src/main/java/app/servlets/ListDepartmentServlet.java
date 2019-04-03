@@ -17,22 +17,15 @@ public class ListDepartmentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String employeeId = req.getParameter("employeeId");
         String departmentId = req.getParameter("deleteButton");
         String nameFilter = req.getParameter("name");
-//        String emailFilter = req.getParameter("email");
         String addressFilter = req.getParameter("address");
-//        String postFilter = req.getParameter("postid");
-//        String departmentFilter = req.getParameter("departmentid");
-//        String headFilter = req.getParameter("head");
-//        String password = req.getParameter("pass");
 
-        if(nameFilter != null){
-            resp.sendRedirect(req.getContextPath() + "/listDepartment?Name="+nameFilter+"&Address="+addressFilter);
-        }
-        else {
+        if (nameFilter != null) {
+            resp.sendRedirect(req.getContextPath() + "/listDepartment?Name=" + nameFilter + "&Address=" + addressFilter);
+        } else {
             DepartmentScripts ds = new DepartmentScripts();
-            ds.deleteDepartment(req);
+            ds.deleteDepartment(departmentId);
 
             resp.sendRedirect(req.getContextPath() + "/listDepartment");
         }
@@ -40,8 +33,23 @@ public class ListDepartmentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ArrayList<String> args = new ArrayList<String>();
+        ArrayList<String> params = new ArrayList<String>();
+
+        String nameFilterString = req.getParameter("Name");
+        if (!(nameFilterString == "" || nameFilterString == null)) {
+            args.add("name");
+            params.add(nameFilterString);
+        }
+        String addressFilterString = req.getParameter("Address");
+        if (!(addressFilterString == "" || addressFilterString == null)) {
+            args.add("address");
+            params.add(addressFilterString);
+        }
+
         DepartmentScripts ds = new DepartmentScripts();
-        ArrayList<Department> departments = ds.selectFilterDepartments(req);
+        ArrayList<Department> departments = ds.selectFilterDepartments(params, args);
 
         req.setAttribute("departmentsData", departments);
 

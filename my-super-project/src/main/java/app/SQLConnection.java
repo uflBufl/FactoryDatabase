@@ -12,13 +12,10 @@ public class SQLConnection {
 
     public SQLConnection() throws NamingException{
         ic = new InitialContext();
-        ds = (DataSource) ic.lookup("java:/comp/env/jdbc/mydb"); // вместо написать java:/comp/env/jdbc/TestDB
+        ds = (DataSource) ic.lookup("java:/comp/env/jdbc/mydb");
     }
 
     public Connection getConnection() throws SQLException{
-//        ic = new InitialContext();
-////        Class.forName("com.mysql.jdbc.Driver");
-//        ds = (DataSource) ic.lookup("java:/comp/env/jdbc/mydb"); // вместо написать java:/comp/env/jdbc/TestDB
         return ds.getConnection();
     }
 }
