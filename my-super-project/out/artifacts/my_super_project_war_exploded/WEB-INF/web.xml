@@ -111,6 +111,18 @@
 
 
 
+    <!-- newTask Department servlet -->
+    <servlet>
+        <servlet-name>newTask</servlet-name>
+        <servlet-class>app.servlets.NewTaskServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>newTask</servlet-name>
+        <url-pattern>/newTask</url-pattern>
+    </servlet-mapping>
+
+
 
 
     <description>MySQL Test App</description>
