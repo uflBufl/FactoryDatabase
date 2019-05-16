@@ -1,7 +1,14 @@
 package app.entities;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+// определяем корневой элемент
+@XmlRootElement(name = "Employee")
+// определяем последовательность тегов в XML
+@XmlType(propOrder = {"name", "email", "address", "postId", "departmentId", "head"})
 public class Employee {
     private int employeeId;
     private String name;
@@ -10,6 +17,9 @@ public class Employee {
     private int postId;
     private int departmentId;
     private int head;
+
+    public Employee(){
+    }
 
     public Employee(int employeeId, String name, String email, String address, int postId, int departmentId, int head) {
         this.employeeId = employeeId;
@@ -21,6 +31,8 @@ public class Employee {
         this.head = head;
     }
 
+    // указываем, что id должно быть атрибутом
+    @XmlAttribute
     public int getEmployeeId() {
         return employeeId;
     }

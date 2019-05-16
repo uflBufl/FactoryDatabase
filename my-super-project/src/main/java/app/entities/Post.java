@@ -4,11 +4,20 @@ import javafx.geometry.Pos;
 
 import java.util.Objects;
 
+import javax.xml.bind.annotation.*;
+
+// определяем корневой элемент
+@XmlRootElement(name = "Post")
+// определяем последовательность тегов в XML
+@XmlType(propOrder = {"name", "salary", "time"})
 public class Post {
     private int postId;
     private String name;
     private int salary;
     private int time;
+
+    public Post() {
+    }
 
     public Post(int postId, String name, int salary, int time) {
         this.postId = postId;
@@ -17,6 +26,8 @@ public class Post {
         this.time = time;
     }
 
+    // указываем, что id должно быть атрибутом
+    @XmlAttribute
     public int getPostId() {
         return postId;
     }

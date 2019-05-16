@@ -1,8 +1,10 @@
 package app.scripts;
 
+import app.Requests.DepartmentRequests;
 import app.Requests.PostRequests;
 import app.Requests.Requests;
 import app.SQLConnection;
+import app.entities.Department;
 import app.entities.Employee;
 import app.entities.Post;
 
@@ -109,6 +111,42 @@ public class NewClassScripts {
             } catch (SQLException se) { /*can't do anything */ }
         }
         return employees;
+    }
+
+    public ArrayList<Department> selectDepartments() {
+        ArrayList<Department> departments = new ArrayList<Department>();
+        try {
+            con = scon.getConnection();
+                String sqlRequest = DepartmentRequests.departmentSelectAll;
+                pstmt = con.prepareStatement(sqlRequest);
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int departmentId = rs.getInt(1);
+                String name = rs.getString(2);
+                String address = rs.getString(3);
+
+                Department department = new Department(departmentId, name, address);
+                departments.add(department);
+            }
+
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            //close connection ,stmt and resultset here
+            try {
+                con.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                pstmt.close();
+            } catch (SQLException se) { /*can't do anything */ }
+            try {
+                rs.close();
+            } catch (SQLException se) { /*can't do anything */ }
+        }
+        return departments;
     }
 
 }

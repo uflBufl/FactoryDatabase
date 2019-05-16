@@ -1,11 +1,21 @@
 package app.entities;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Objects;
 
+// определяем корневой элемент
+@XmlRootElement(name = "Department")
+// определяем последовательность тегов в XML
+@XmlType(propOrder = {"name", "address"})
 public class Department {
     private int departmentId;
     private String name;
     private String address;
+
+    public Department(){
+    }
 
     public Department(int departmentId, String name, String address) {
         this.departmentId = departmentId;
@@ -13,6 +23,8 @@ public class Department {
         this.address = address;
     }
 
+    // указываем, что id должно быть атрибутом
+    @XmlAttribute
     public int getDepartmentId() {
         return departmentId;
     }
