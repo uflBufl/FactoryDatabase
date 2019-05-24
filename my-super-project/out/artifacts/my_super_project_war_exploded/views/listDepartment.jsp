@@ -59,6 +59,7 @@
     <div class = "manyPoint" onclick=location.href='/detailDepartment?DepartmentId=<%= department.getDepartmentId()%>'>
         <span class = "point"><%= department.getDepartmentId()%></span>
         <span class = "point"><%= department.getName()%></span>
+        <span id="fileDownload"><a id="downloadLink" class="hyperLink" href="<%=request.getContextPath()%>/listDepartment?departmentId=<%=department.getDepartmentId()%>">Download</a></span>
 
         <button type="submit" name = "deleteButton" value="<%= department.getDepartmentId()%>" class = "deleteButton">Delete</button>
     </div>

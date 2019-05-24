@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataBase>
+    <posts>
+        <posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="post" postId="1">
+            <name>Worker</name>
+            <salary>30000</salary>
+            <time>40</time>
+        </posts>
+        <posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="post" postId="4">
+            <name>Cleaner</name>
+            <salary>10000</salary>
+            <time>20</time>
+        </posts>
+        <posts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="post" postId="6">
+            <name>Deliver</name>
+            <salary>10000</salary>
+            <time>20</time>
+        </posts>
+    </posts>
+    <employees>
+        <employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="employee" employeeId="1">
+            <name>2</name>
+            <email>3</email>
+            <address>4</address>
+            <postId>5</postId>
+            <departmentId>6</departmentId>
+            <head>7</head>
+        </employees>
+        <employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="employee" employeeId="1">
+            <name>2</name>
+            <email>3</email>
+            <address>4</address>
+            <postId>5</postId>
+            <departmentId>6</departmentId>
+            <head>7</head>
+        </employees>
+        <employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="employee" employeeId="1">
+            <name>2</name>
+            <email>3</email>
+            <address>4</address>
+            <postId>5</postId>
+            <departmentId>6</departmentId>
+            <head>7</head>
+        </employees>
+    </employees>
+    <departments/>
+</dataBase>

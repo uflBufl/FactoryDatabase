@@ -64,6 +64,8 @@
     <span class = "point"><%= post.getName()%></span>
     <span class = "point"><%= post.getTime()%></span>
     <span class = "point"><%= post.getSalary()%></span>
+    <span id="fileDownload"><a id="downloadLink" class="hyperLink" href="<%=request.getContextPath()%>/newTask?postId=<%=post.getPostId()%>">Download</a></span>
+    <%--<button type="submit" name = "deleteButton" value="<%= post.getPostId()%>" class = "deleteButton">Delete</button>--%>
 
 
     <div class = "point">

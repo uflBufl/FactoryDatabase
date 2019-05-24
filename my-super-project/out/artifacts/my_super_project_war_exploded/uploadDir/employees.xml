@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Employee employeeId="1">
+    <name>Ivan</name>
+    <email>myeamil@yandex.ru</email>
+    <address>home</address>
+    <postId>4</postId>
+    <departmentId>1</departmentId>
+    <head>0</head>
+</Employee>

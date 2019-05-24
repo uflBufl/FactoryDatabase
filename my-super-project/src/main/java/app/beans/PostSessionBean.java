@@ -4,7 +4,10 @@ import app.entities.DataBase;
 import app.entities.Department;
 import app.entities.Employee;
 import app.entities.Post;
+import app.scripts.DepartmentScripts;
+import app.scripts.EmployeeScripts;
 import app.scripts.NewClassScripts;
+import app.scripts.PostScripts;
 
 import javax.ejb.Stateless;
 import java.io.StringWriter;
@@ -54,6 +57,149 @@ public class PostSessionBean implements PostSessionBeanLocal {
 
         return departments;
     }
+
+    public void editPost(Post post, String action){
+
+        System.out.println("Start Edit");
+
+        ArrayList<String> args = new ArrayList<String>();
+        ArrayList<String> params = new ArrayList<String>();
+
+        String nameFilterString = post.getName();
+        if (!(nameFilterString.equals(""))) {
+            args.add("name");
+            params.add(nameFilterString);
+        }
+        String salaryFilterString = String.valueOf(post.getSalary());
+        if (!(salaryFilterString.equals(""))) {
+            args.add("salary");
+            params.add(salaryFilterString);
+        }
+        String timeFilterString = String.valueOf(post.getTime());
+        if (!(timeFilterString.equals(""))) {
+            args.add("time");
+            params.add(timeFilterString);
+        }
+
+
+        PostScripts ps = new PostScripts();
+        if(action.equals("edit")) {
+            String postId = String.valueOf(post.getPostId());
+            params.add(postId);
+            ps.updatePost(params, args);
+        }
+        else{
+            String idFilterString = String.valueOf(post.getPostId());
+            if (!(idFilterString.equals(""))) {
+                args.add("postId");
+                params.add(idFilterString);
+            }
+            ps.addPost(params, args);
+        }
+//        System.out.println(args.get(0));
+//        System.out.println(params.get(0));
+
+//        PostScripts ps = new PostScripts();
+//        ps.addPost(params, args);
+//        ps.updatePost(params, args);
+    }
+
+
+
+
+    public void editEmployee(Employee employee, String action){
+        System.out.println("Start Edit");
+
+        ArrayList<String> args = new ArrayList<String>();
+        ArrayList<String> params = new ArrayList<String>();
+
+        String nameFilterString = employee.getName();
+        if (!(nameFilterString.equals(""))) {
+            args.add("name");
+            params.add(nameFilterString);
+        }
+        String emailFilterString = employee.getEmail();
+        if (!(emailFilterString.equals("") || emailFilterString.equals("null"))) {
+            args.add("email");
+            params.add(emailFilterString);
+        }
+        String addressFilterString = employee.getAddress();
+        if (!(addressFilterString.equals("") || addressFilterString.equals("null"))) {
+            args.add("address");
+            params.add(addressFilterString);
+        }
+        String postIdFilterString = String.valueOf(employee.getPostId());
+        if (!(postIdFilterString.equals(""))) {
+            args.add("postId");
+            params.add(postIdFilterString);
+        }
+        String departmentIdFilterString = String.valueOf(employee.getDepartmentId());
+        if (!(departmentIdFilterString.equals(""))) {
+            args.add("departmentId");
+            params.add(departmentIdFilterString);
+        }
+        String headFilterString = String.valueOf(employee.getHead());
+        if (!(headFilterString.equals("") || headFilterString.equals("0"))) {
+            args.add("head");
+            params.add(headFilterString);
+        }
+
+
+        EmployeeScripts es = new EmployeeScripts();
+        if(action.equals("edit")) {
+            String employeeId = String.valueOf(employee.getEmployeeId());
+            params.add(employeeId);
+            es.updateEmployee(params, args);
+        }
+        else{
+            String idFilterString = String.valueOf(employee.getEmployeeId());
+            if (!(idFilterString.equals(""))) {
+                args.add("employeeId");
+                params.add(idFilterString);
+            }
+            es.addEmployee(params, args);
+        }
+    }
+
+
+
+
+    public void editDepartment(Department department, String action){
+        System.out.println("Start Edit");
+
+        ArrayList<String> args = new ArrayList<String>();
+        ArrayList<String> params = new ArrayList<String>();
+
+        String nameFilterString = department.getName();
+        if (!(nameFilterString.equals(""))) {
+            args.add("name");
+            params.add(nameFilterString);
+        }
+        String addressFilterString = department.getAddress();
+        if (!(addressFilterString.equals("") || addressFilterString.equals("null"))) {
+            args.add("address");
+            params.add(addressFilterString);
+        }
+
+
+        DepartmentScripts ds = new DepartmentScripts();
+        if(action.equals("edit")) {
+            String departmentId = String.valueOf(department.getDepartmentId());
+            params.add(departmentId);
+            ds.updateDepartment(params, args);
+        }
+        else{
+            String idFilterString = String.valueOf(department.getDepartmentId());
+            if (!(idFilterString.equals(""))) {
+                args.add("departmentId");
+                params.add(idFilterString);
+            }
+            ds.addDepartment(params, args);
+        }
+    }
+
+
+
 
 //    public void exportBean(Post post){
 //        // определяем название файла, куда будем сохранять
@@ -134,6 +280,36 @@ public class PostSessionBean implements PostSessionBeanLocal {
             System.out.println("Ноль?");
             System.out.println(unmarshPost.toString());
         }
+    }
+
+    public <T extends Object> File convertToXml(T db){
+
+        File f = new File("test.xml");
+
+        try {
+            JAXBContext context = JAXBContext.newInstance( Post.class, Employee.class, Department.class, DataBase.class );
+            Marshaller marshaller = context.createMarshaller();
+            // устанавливаем флаг для читабельного вывода XML в JAXB
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+            // маршаллинг объекта в файл
+            marshaller.marshal(db,  f);
+//            return f;
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return f;
+    }
+
+    public <T extends Object> T importFromXml(String filePath){
+
+        // восстанавливаем объект из XML файла
+        T unmarshPost = fromXmlToObject(filePath);
+        if (unmarshPost != null) {
+            System.out.println("Ноль?");
+            System.out.println(unmarshPost.toString());
+        }
+        return unmarshPost;
     }
 
     // восстанавливаем объект из XML файла

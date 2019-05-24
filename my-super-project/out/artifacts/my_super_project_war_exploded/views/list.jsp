@@ -63,6 +63,7 @@
             <span class = "point"><%= employee.getName()%></span>
             <span class = "point"><%= employee.getPostId()%></span>
             <span class = "point"><%= employee.getDepartmentId()%></span>
+            <span id="fileDownload"><a id="downloadLink" class="hyperLink" href="<%=request.getContextPath()%>/list?employeeId=<%=employee.getEmployeeId()%>">Download</a></span>
 
         <button type="submit" name = "deleteButton" value="<%= employee.getEmployeeId()%>" class = "deleteButton">Delete</button>
     </div>

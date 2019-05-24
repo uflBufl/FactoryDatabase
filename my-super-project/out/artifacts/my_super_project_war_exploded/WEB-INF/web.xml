@@ -111,7 +111,7 @@
 
 
 
-    <!-- newTask Department servlet -->
+    <!-- newTask servlet -->
     <servlet>
         <servlet-name>newTask</servlet-name>
         <servlet-class>app.servlets.NewTaskServlet</servlet-class>
@@ -120,6 +120,32 @@
     <servlet-mapping>
         <servlet-name>newTask</servlet-name>
         <url-pattern>/newTask</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!-- import servlet -->
+    <servlet>
+        <servlet-name>import</servlet-name>
+        <servlet-class>app.servlets.ImportServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>import</servlet-name>
+        <url-pattern>/import</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!-- error servlet -->
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <servlet-class>app.servlets.ErrorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/error</url-pattern>
     </servlet-mapping>
 
 
